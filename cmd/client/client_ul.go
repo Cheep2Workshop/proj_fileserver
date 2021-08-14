@@ -45,3 +45,17 @@ func LoadFile(filename string) (string, *bytes.Buffer, error) {
 	writer.Close()
 	return contentType, body, nil
 }
+
+func Download(url string, filepath string) error {
+	resp, err := http.Get(url)
+	if err != nil {
+		return err
+	}
+	out, err := os.Create(filepath)
+	if err != nil {
+		return err
+	}
+	defer out.Close()
+	_, err = io.Copy(out, resp.Body)
+	return err
+}

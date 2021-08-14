@@ -12,7 +12,7 @@ type ULCtrl struct {
 	FileStore *service.FileStore
 }
 
-func SetupULCtrl(r *gin.Engine, folder string) {
+func SetupUL(r *gin.Engine, folder string) {
 	ctrl := &ULCtrl{
 		FileStore: &service.FileStore{
 			Folder: folder,

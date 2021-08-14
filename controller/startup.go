@@ -14,9 +14,10 @@ import (
 
 func SetupRouter(folder string) *gin.Engine {
 	router := gin.Default()
+	router.MaxMultipartMemory = 1
 	router.Any("/health", Health)
-	router.GET("/download/:file", Download)
-	SetupULCtrl(router, folder)
+	SetupDL(router, folder)
+	SetupUL(router, folder)
 	return router
 }
 

@@ -7,7 +7,9 @@ import (
 
 func main() {
 	url := "http://localhost:8080/upload"
-	err := client.Upload(url, "1628312808803.gif")
+	// file := "1628312808803.gif"
+	file := "2021-05-01 02-44-36.mkv"
+	err := client.Upload(url, file)
 	if err != nil {
 		log.Fatal(err.Error())
 	}

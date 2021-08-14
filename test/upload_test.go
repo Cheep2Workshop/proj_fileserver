@@ -3,6 +3,7 @@ package tests
 import (
 	"fileserver/cmd/client"
 	"fileserver/controller"
+	"fileserver/service"
 	"log"
 	"net/http"
 	"net/http/httptest"
@@ -16,18 +17,27 @@ import (
 type ULSuite struct {
 	suite.Suite
 	Url    string
+	Store  *service.FileStore
 	Router *gin.Engine
 }
 
 func (t *ULSuite) SetupSuite() {
 	log.Println("Setup")
+	folder := "./temp/"
 	t.Url = "http://localhost:8080/upload"
-	t.Router = controller.SetupRouter("./temp/")
+	t.Store = &service.FileStore{
+		Folder: folder,
+	}
+	router := gin.Default()
+	controller.SetupUL(router, folder)
+	controller.SetupDL(router, folder)
+	t.Router = router
 }
 
 func (t *ULSuite) TearDownSuite() {
 	log.Println("TearDown")
 	// file delete all
+	t.Store.DeleteAll()
 }
 
 func (t *ULSuite) TestHello() {
