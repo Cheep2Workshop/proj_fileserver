@@ -15,7 +15,7 @@ func DefaultFileStore() *FileStore {
 	}
 }
 
-const defaultFolder = "./"
+const defaultFolder = "files/"
 
 func (store *FileStore) VarifyFileName(filename string) string {
 	stamp := time.Now().Unix()

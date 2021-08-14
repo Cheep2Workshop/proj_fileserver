@@ -4,8 +4,10 @@ import (
 	"fileserver/controller"
 )
 
+const filefolder = "files/"
+
 func main() {
-	router := controller.SetupRouter()
+	router := controller.SetupRouter(filefolder)
 	controller.RunGin(router)
 
 }
